@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Podcast {
   final String id;
   final String title;
@@ -30,4 +28,4 @@ class Podcast {
       audioUrl: json['audioUrl'] ?? '',
     );
   }
-} 
+}

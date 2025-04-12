@@ -104,30 +104,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSettingItem(
               icon: Icons.person_outline,
               title: 'Profil Düzenle',
-              onTap: () {
-                // TODO: Implement profile editing
-              },
+              onTap: () {},
             ),
             _buildSettingItem(
               icon: Icons.notifications_outlined,
               title: 'Bildirimler',
-              onTap: () {
-                // TODO: Implement notifications settings
-              },
+              onTap: () {},
             ),
             _buildSettingItem(
               icon: Icons.language,
               title: 'Dil',
-              onTap: () {
-                // TODO: Implement language settings
-              },
+              onTap: () {},
             ),
             _buildSettingItem(
               icon: Icons.help_outline,
               title: 'Yardım',
-              onTap: () {
-                // TODO: Implement help section
-              },
+              onTap: () {},
             ),
             const SizedBox(height: 32),
             Center(
@@ -180,4 +172,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       onTap: onTap,
     );
   }
-} 
+}

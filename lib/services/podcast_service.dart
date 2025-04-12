@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import '../models/podcast.dart';
 
 class PodcastService {
@@ -50,14 +48,13 @@ class PodcastService {
       audioUrl: 'assets/mp3/kenan_dogulu.mp3',
     ),
     Podcast(
-      id: '6',
-      title: 'Yıldız Tilbe - Delikanlım',
-      author: 'Yıldız Tilbe',
-      imageUrl: 'assets/images/yildiz_tilbe.png', 
-      category: 'Tech',
-      duration: const Duration(minutes: 4, seconds: 12),
-      audioUrl: 'assets/mp3/yildiz_tilbe.mp3'
-    ),
+        id: '6',
+        title: 'Yıldız Tilbe - Delikanlım',
+        author: 'Yıldız Tilbe',
+        imageUrl: 'assets/images/yildiz_tilbe.png',
+        category: 'Tech',
+        duration: const Duration(minutes: 4, seconds: 12),
+        audioUrl: 'assets/mp3/yildiz_tilbe.mp3'),
   ];
 
   Future<List<Podcast>> getTrendingPodcasts() async {
@@ -69,7 +66,8 @@ class PodcastService {
       return _podcasts;
     }
     return _podcasts
-        .where((podcast) => podcast.category.toLowerCase() == category.toLowerCase())
+        .where((podcast) =>
+            podcast.category.toLowerCase() == category.toLowerCase())
         .toList();
   }
 
@@ -88,4 +86,4 @@ class PodcastService {
       return null;
     }
   }
-} 
+}

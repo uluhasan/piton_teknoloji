@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Podcast> _filteredPodcasts = [];
   String _selectedCategory = 'All';
   bool _isLoading = true;
-  List<Podcast> _searchResults = [];
+  List<Podcast> searchResults = [];
   int _selectedIndex = 0;
 
   final List<String> _categories = ['All', 'Life', 'Comedy', 'Tech'];
@@ -91,17 +91,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _searchPodcasts(String query) async {
+  Future<void> searchPodcasts(String query) async {
     if (query.isEmpty) {
       setState(() {
-        _searchResults = [];
+        searchResults = [];
       });
       return;
     }
 
     final results = await _podcastService.searchPodcasts(query);
     setState(() {
-      _searchResults = results;
+      searchResults = results;
     });
   }
 
@@ -170,7 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               label: Text(
                                 category,
                                 style: TextStyle(
-                                  color: isSelected ? Colors.white : Colors.grey[400],
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.grey[400],
                                 ),
                               ),
                               selected: isSelected,
@@ -199,7 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (_filteredPodcasts.length != _trendingPodcasts.length)
+                        if (_filteredPodcasts.length !=
+                            _trendingPodcasts.length)
                           Text(
                             '${_filteredPodcasts.length} results',
                             style: TextStyle(
@@ -231,7 +234,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     else
                       Expanded(
                         child: GridView.builder(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             childAspectRatio: 0.8,
                             crossAxisSpacing: 16,
@@ -245,7 +249,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NowPlayingScreen(podcast: podcast),
+                                    builder: (context) =>
+                                        NowPlayingScreen(podcast: podcast),
                                   ),
                                 );
                               },
@@ -321,4 +326,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-} 
+}

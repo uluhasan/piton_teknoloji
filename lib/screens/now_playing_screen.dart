@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:logger/logger.dart';
 import '../models/podcast.dart';
 
 class NowPlayingScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
   bool _isPlaying = false;
   Duration _duration = Duration.zero;
   Duration _position = Duration.zero;
+  var logger = Logger();
 
   @override
   void initState() {
@@ -30,8 +32,8 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
   Future<void> _initAudioPlayer() async {
     try {
       await _audioPlayer.setAsset(widget.podcast.audioUrl);
-      _duration = await _audioPlayer.duration ?? Duration.zero;
-      
+      _duration = _audioPlayer.duration ?? Duration.zero;
+
       _audioPlayer.positionStream.listen((position) {
         if (mounted) {
           setState(() {
@@ -49,7 +51,7 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
         }
       });
     } catch (e) {
-      print('Error initializing audio player: $e');
+      logger.e("Error log", error: 'Test Error');
     }
   }
 
@@ -144,7 +146,8 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                     onChanged: (value) {
                       setState(() {
                         _currentPosition = value;
-                        final newPosition = Duration(seconds: (value * _duration.inSeconds).toInt());
+                        final newPosition = Duration(
+                            seconds: (value * _duration.inSeconds).toInt());
                         _audioPlayer.seek(newPosition);
                       });
                     },
@@ -177,14 +180,17 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.skip_previous, color: Colors.white, size: 36),
+                  icon: const Icon(Icons.skip_previous,
+                      color: Colors.white, size: 36),
                   onPressed: () {
                     _audioPlayer.seek(Duration.zero);
                   },
                 ),
                 IconButton(
                   icon: Icon(
-                    _isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
+                    _isPlaying
+                        ? Icons.pause_circle_filled
+                        : Icons.play_circle_fill,
                     color: Colors.purple,
                     size: 64,
                   ),
@@ -197,7 +203,8 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.skip_next, color: Colors.white, size: 36),
+                  icon: const Icon(Icons.skip_next,
+                      color: Colors.white, size: 36),
                   onPressed: () {
                     _audioPlayer.seek(_duration);
                   },
@@ -210,4 +217,4 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
       ),
     );
   }
-} 
+}
