@@ -4,6 +4,8 @@ import '../services/podcast_service.dart';
 import 'now_playing_screen.dart';
 import 'library_screen.dart';
 import 'profile_screen.dart';
+import '../widgets/tab_navigation.dart'; // Yeni widget'ı içe aktar
+import '../widgets/custom_text.dart'; // CustomText widget'ını içe aktar
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -120,13 +122,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Podkes',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const CustomText(
+                          text: 'Podkes',
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
                         CircleAvatar(
                           radius: 16,
@@ -167,13 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: FilterChip(
-                              label: Text(
-                                category,
-                                style: TextStyle(
-                                  color: isSelected
-                                      ? Colors.white
-                                      : Colors.grey[400],
-                                ),
+                              label: CustomText(
+                                text: category,
+                                color: isSelected
+                                    ? Colors.white
+                                    : Colors.grey[400]!,
+                                fontSize: 14,
                               ),
                               selected: isSelected,
                               onSelected: (_) => _onCategorySelected(category),
@@ -193,22 +192,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Trending',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const CustomText(
+                          text: 'Trending',
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                         if (_filteredPodcasts.length !=
                             _trendingPodcasts.length)
-                          Text(
-                            '${_filteredPodcasts.length} results',
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 14,
-                            ),
+                          CustomText(
+                            text: '${_filteredPodcasts.length} results',
+                            color: Colors.grey[400]!,
+                            fontSize: 14,
                           ),
                       ],
                     ),
@@ -222,12 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     else if (_filteredPodcasts.isEmpty)
                       Expanded(
                         child: Center(
-                          child: Text(
-                            'No podcasts found',
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 16,
-                            ),
+                          child: CustomText(
+                            text: 'No podcasts found',
+                            color: Colors.grey[400]!,
+                            fontSize: 16,
                           ),
                         ),
                       )
@@ -270,22 +263,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(
-                                    podcast.title,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                  CustomText(
+                                    text: podcast.title,
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  Text(
-                                    podcast.author,
-                                    style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 14,
-                                    ),
+                                  CustomText(
+                                    text: podcast.author,
+                                    color: Colors.grey[400]!,
+                                    fontSize: 14,
                                   ),
                                 ],
                               ),
@@ -298,31 +285,13 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : _screens[_selectedIndex - 1],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF1C1B1F),
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey[600],
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: (index) {
+      bottomNavigationBar: TabNavigation(
+        selectedIndex: _selectedIndex,
+        onTabSelected: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Browse',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_music),
-            label: 'Library',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
       ),
     );
   }

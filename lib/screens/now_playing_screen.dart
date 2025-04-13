@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import '../models/podcast.dart';
+import '../widgets/custom_text.dart'; // CustomText widget'ını içe aktar
 
 class NowPlayingScreen extends StatefulWidget {
   final Podcast podcast;
@@ -79,9 +80,11 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Now Playing',
-          style: TextStyle(color: Colors.white),
+        title: const CustomText(
+          text: 'Now Playing',
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
         actions: [
           IconButton(
@@ -113,21 +116,17 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
             const SizedBox(height: 32),
 
             // Title and Author
-            Text(
-              widget.podcast.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            CustomText(
+              text: widget.podcast.title,
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
             const SizedBox(height: 8),
-            Text(
-              widget.podcast.author,
-              style: TextStyle(
-                color: Colors.grey[400],
-                fontSize: 16,
-              ),
+            CustomText(
+              text: widget.podcast.author,
+              color: Colors.grey[400]!,
+              fontSize: 16,
             ),
             const SizedBox(height: 32),
 
@@ -160,13 +159,15 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        _formatDuration(_position),
-                        style: TextStyle(color: Colors.grey[400]),
+                      CustomText(
+                        text: _formatDuration(_position),
+                        color: Colors.grey[400]!,
+                        fontSize: 14,
                       ),
-                      Text(
-                        _formatDuration(_duration),
-                        style: TextStyle(color: Colors.grey[400]),
+                      CustomText(
+                        text: _formatDuration(_duration),
+                        color: Colors.grey[400]!,
+                        fontSize: 14,
                       ),
                     ],
                   ),

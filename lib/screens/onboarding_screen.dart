@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:piton_teknoloji/models/model.dart';
 import 'home_screen.dart';
+import '../widgets/custom_text.dart'; // CustomText widget'ını içe aktar
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -16,13 +18,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingPage(
       image: 'assets/onboarding1.png',
       title: 'Keşfet',
-      description: 'Favori podcastlerinizi bulun ve yenilerini keşfedin.',
+      description: 'Favorinizi bulun ve yenilerini keşfedin.',
       backgroundColor: Colors.purple,
     ),
     OnboardingPage(
       image: 'assets/onboarding2.png',
       title: 'Her Yerde Dinle',
-      description: 'Podcastleri çevrimiçi dinleyin veya çevrimdışı dinlemek için indirin.',
+      description: 'Podcastleri dinleyin ya da indirin.',
       backgroundColor: Colors.blue,
     ),
     OnboardingPage(
@@ -59,22 +61,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       color: page.backgroundColor,
                     ),
                     const SizedBox(height: 64),
-                    Text(
-                      page.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    CustomText(
+                      text: page.title,
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      page.description,
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: 16,
-                      ),
+                    CustomText(
+                      text: page.description,
+                      color: Colors.grey[400]!,
+                      fontSize: 16,
                       textAlign: TextAlign.center,
                     ),
                     const Spacer(),
@@ -134,12 +132,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: Text(
-                      _currentPage < _pages.length - 1 ? 'İleri' : 'Başla',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: CustomText(
+                      text:
+                          _currentPage < _pages.length - 1 ? 'İleri' : 'Başla',
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -151,17 +149,3 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-class OnboardingPage {
-  final String image;
-  final String title;
-  final String description;
-  final Color backgroundColor;
-
-  OnboardingPage({
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.backgroundColor,
-  });
-} 

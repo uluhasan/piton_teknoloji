@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:piton_teknoloji/widgets/custom_text.dart';
 import '../models/podcast.dart';
 import '../services/podcast_service.dart';
 import 'now_playing_screen.dart';
@@ -35,13 +36,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text(
-          'Kitaplığım',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const CustomText(
+          text: "Kitaplığım",
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
         elevation: 0,
       ),
@@ -49,9 +48,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
           ? const Center(child: CircularProgressIndicator())
           : _savedPodcasts.isEmpty
               ? const Center(
-                  child: Text(
-                    'Henüz kaydedilmiş podcast yok',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: CustomText(
+                    text: "Henüz kaydedilmiş podcast yok.",
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 )
               : ListView.builder(
@@ -64,7 +64,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NowPlayingScreen(podcast: podcast),
+                            builder: (context) =>
+                                NowPlayingScreen(podcast: podcast),
                           ),
                         );
                       },
@@ -90,31 +91,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    podcast.title,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                                  CustomText(
+                                    text: podcast.title,
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    podcast.author,
-                                    style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 14,
-                                    ),
+                                  CustomText(
+                                    text: podcast.author,
+                                    color: Colors.grey[400] ?? Colors.green,
+                                    fontSize: 14,
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    '${podcast.duration.inMinutes}:${(podcast.duration.inSeconds % 60).toString().padLeft(2, '0')}',
-                                    style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 12,
-                                    ),
+                                  CustomText(
+                                    text:
+                                        '${podcast.duration.inMinutes}:${(podcast.duration.inSeconds % 60).toString().padLeft(2, '0')}',
+                                    color: Colors.grey[400] ?? Colors.green,
+                                    fontSize: 12,
                                   ),
                                 ],
                               ),
@@ -140,4 +134,4 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ),
     );
   }
-} 
+}

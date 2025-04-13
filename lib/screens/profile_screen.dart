@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'onboarding_screen.dart';
+import '../widgets/custom_text.dart'; // CustomText widget'ını içe aktar
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -44,13 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text(
-          'Profil',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const CustomText(
+          text: 'Profil',
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
         elevation: 0,
       ),
@@ -72,33 +71,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    _username,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  CustomText(
+                    text: _username,
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    _email,
-                    style: TextStyle(
-                      color: Colors.grey[400],
-                      fontSize: 16,
-                    ),
+                  CustomText(
+                    text: _email,
+                    color: Colors.grey[400]!,
+                    fontSize: 16,
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 32),
-            const Text(
-              'Hesap Ayarları',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            const CustomText(
+              text: 'Hesap Ayarları',
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
             const SizedBox(height: 16),
             _buildSettingItem(
@@ -135,13 +128,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
-                  'Çıkış Yap',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: const CustomText(
+                  text: 'Çıkış Yap',
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -158,12 +149,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
+      title: CustomText(
+        text: title,
+        color: Colors.white,
+        fontSize: 16,
       ),
       trailing: const Icon(
         Icons.chevron_right,
